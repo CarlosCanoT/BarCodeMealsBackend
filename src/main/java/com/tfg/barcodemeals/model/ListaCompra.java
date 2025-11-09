@@ -1,9 +1,11 @@
 package com.tfg.barcodemeals.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,17 +21,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "supermercado")
-public class Supermercado {
+@Table(name = "listaCompra")
+public class ListaCompra {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nombre;
-	private String direccion;
+	@Column(nullable = false)
+	private LocalDate fechaCreacion;
 	
 	@ManyToOne
-	private Ciudad ciudad;
-	  
-	@OneToMany(mappedBy = "supermercado", cascade = CascadeType.ALL)
-    private List<Precio> precios = new ArrayList<>();
+	private Usuario usuario;
+
+	@OneToMany(mappedBy = "listaCompra", cascade = CascadeType.ALL)
+	private List<LineaCompra> lineas = new ArrayList<>();
 }
