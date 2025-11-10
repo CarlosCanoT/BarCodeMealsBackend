@@ -1,5 +1,7 @@
 package com.tfg.barcodemeals.model;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,6 +22,7 @@ public class Precio {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private double valor;
+	private LocalDate fecha;
 	
 	@ManyToOne
 	private Producto producto;

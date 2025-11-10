@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -17,15 +19,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "alergeno")
-public class Alergeno {
+@Table(name = "reaccionAdversa")
+public class ReaccionAdversa {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	private String nombre;
+	 @Enumerated(EnumType.STRING)
+	 private NivelRiesgo nivelRiesgo;
 	
-	   @ManyToMany(mappedBy = "alergenos")
-	    private List<Usuario> usuarios = new ArrayList<>();
-
-	    @ManyToMany(mappedBy = "alergenos")
-	    private List<Producto> productos = new ArrayList<>();
+	 @ManyToMany(mappedBy = "reaccionesAdversas")
+	 private List<Usuario> usuarios = new ArrayList<>();
 }

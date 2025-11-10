@@ -31,6 +31,9 @@ public class Producto {
 private Long id;
 private String barcode;
 @Column(nullable = false)
+private String nombre;
+private String marca;
+@Column(nullable = false)
 private double peso;
 private double kcal;
 @Column(nullable = false)
@@ -54,10 +57,11 @@ private UnidadMedida unidad;
     joinColumns = @JoinColumn(name = "producto_id"),
     inverseJoinColumns = @JoinColumn(name = "alergeno_id")
 )
-private List<Alergeno> alergenos = new ArrayList<>();
+private List<ReaccionAdversa> reaccionesAdversas = new ArrayList<>();
 
 
 @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
 private List<Precio> precios = new ArrayList<>();
+
 
 }
