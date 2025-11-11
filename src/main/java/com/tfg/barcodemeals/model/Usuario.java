@@ -1,5 +1,6 @@
 package com.tfg.barcodemeals.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +36,8 @@ public class Usuario {
     private String apodo;
     private String email;
     private String telefono;
-    private int edad;
+    private LocalDate fechaNacimiento;
+    private Genero genero;
     private double peso;
     private double altura;
     

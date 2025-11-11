@@ -23,6 +23,8 @@ public class Precio {
 	private Long id;
 	private double valor;
 	private LocalDate fecha;
+	private boolean oferta;
+	private double descuento; 
 	
 	@ManyToOne
 	private Producto producto;

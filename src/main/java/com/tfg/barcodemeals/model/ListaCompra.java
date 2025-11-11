@@ -27,6 +27,7 @@ public class ListaCompra {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nombre;
+	private String precioTotal;
 	@Column(nullable = false)
 	private LocalDate fechaCreacion;
 	

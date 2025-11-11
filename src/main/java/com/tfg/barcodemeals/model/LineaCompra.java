@@ -24,7 +24,7 @@ public class LineaCompra {
 	private int cantidad;
     @Column(nullable = false)
     private boolean comprado;
-    
+    private double precioLinea;
     @ManyToOne
     private ListaCompra listaCompra;
 

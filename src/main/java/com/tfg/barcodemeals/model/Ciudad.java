@@ -22,7 +22,8 @@ public class Ciudad {
 	private Long id;
 	private String nombre;
 	private String provincia;
-	private String país;
+	private String pais;
+	private String codigoPostal;
 	 @OneToMany(mappedBy = "ciudad")
 	 private List<Usuario> usuarios;
 

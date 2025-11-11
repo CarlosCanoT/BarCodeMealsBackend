@@ -33,6 +33,7 @@ private String barcode;
 @Column(nullable = false)
 private String nombre;
 private String marca;
+private String categoria;
 @Column(nullable = false)
 private double peso;
 private double kcal;
@@ -51,11 +52,14 @@ private double fibra;
 @Enumerated(EnumType.STRING)
 private UnidadMedida unidad;
 
+@Enumerated(EnumType.STRING)
+private Envase envase;
+
 @ManyToMany
 @JoinTable(
-    name = "producto_alergeno",
+    name = "producto_reaccionAdversa",
     joinColumns = @JoinColumn(name = "producto_id"),
-    inverseJoinColumns = @JoinColumn(name = "alergeno_id")
+    inverseJoinColumns = @JoinColumn(name = "reaccionAdversa_id")
 )
 private List<ReaccionAdversa> reaccionesAdversas = new ArrayList<>();
 
