@@ -1,6 +1,6 @@
 package com.tfg.barcodemeals.model;
 
-import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,8 +30,8 @@ public class Supermercado {
 	private String telefono;
 	private String web;
 	private double rating;
-	private LocalDate horaApertura;
-	private LocalDate horaCierre;
+	private LocalTime horaApertura;
+	private LocalTime horaCierre;
 	
 	@ManyToOne
 	private Ciudad ciudad;

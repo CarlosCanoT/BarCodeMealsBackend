@@ -29,6 +29,7 @@ public class Producto {
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 private Long id;
+@Column(nullable = true, unique = false)
 private String barcode;
 @Column(nullable = false)
 private String nombre;
@@ -57,12 +58,18 @@ private Envase envase;
 
 @ManyToMany
 @JoinTable(
-    name = "producto_reaccionAdversa",
+    name = "producto_reaccion_adversa",
     joinColumns = @JoinColumn(name = "producto_id"),
-    inverseJoinColumns = @JoinColumn(name = "reaccionAdversa_id")
+    inverseJoinColumns = @JoinColumn(name = "reaccion_adversa_id")
 )
+
 private List<ReaccionAdversa> reaccionesAdversas = new ArrayList<>();
 
+@ManyToMany(mappedBy="ingredientes")
+private List<Plato> platos = new ArrayList<>();
+
+@ManyToMany(mappedBy="productos")
+private List<Comida> comidas = new ArrayList<>();
 
 @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
 private List<Precio> precios = new ArrayList<>();

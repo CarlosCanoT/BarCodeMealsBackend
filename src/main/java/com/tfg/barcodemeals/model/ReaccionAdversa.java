@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "reaccionAdversa")
+@Table(name = "reaccion_adversa")
 public class ReaccionAdversa {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,6 +34,6 @@ public class ReaccionAdversa {
 	 @ManyToMany(mappedBy = "reaccionesAdversas")
 	 private List<Usuario> usuarios = new ArrayList<>();
 	 
-	 @ManyToMany(mappedBy = "reacciones")
+	 @ManyToMany(mappedBy = "reaccionesAdversas")
 	 private List<Producto> productos = new ArrayList<>();
 }

@@ -1,6 +1,7 @@
 package com.tfg.barcodemeals.model;
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,8 +21,11 @@ public class Ciudad {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Column(nullable = false)
 	private String nombre;
+	@Column(nullable = false)
 	private String provincia;
+	@Column(nullable = false)
 	private String pais;
 	private String codigoPostal;
 	 @OneToMany(mappedBy = "ciudad")

@@ -21,19 +21,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "listaCompra")
+@Table(name = "lista_compra")
 public class ListaCompra {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nombre;
-	private String precioTotal;
+	private double precioTotal;
 	@Column(nullable = false)
 	private LocalDate fechaCreacion;
 	
 	@ManyToOne
 	private Usuario usuario;
 
-	@OneToMany(mappedBy = "listaCompra", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "listaCompra", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<LineaCompra> lineas = new ArrayList<>();
 }

@@ -46,15 +46,13 @@ public class Usuario {
     
     @ManyToMany
     @JoinTable(
-        name = "usuario_reaccionAdversa",
+        name = "usuario_reaccion_adversa",
         joinColumns = @JoinColumn(name = "usuario_id"),
-        inverseJoinColumns = @JoinColumn(name = "reaccionAdversa_id")
+        inverseJoinColumns = @JoinColumn(name = "reaccion_adversa_id")
     )
     private List<ReaccionAdversa> reaccionesAdversas = new ArrayList<>();
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RegistroDiario> registrosDiarios = new ArrayList<>();
-
-    
 
 }
