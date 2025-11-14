@@ -65,7 +65,7 @@ private Envase envase;
 
 private List<ReaccionAdversa> reaccionesAdversas = new ArrayList<>();
 
-@ManyToMany(mappedBy="ingredientes")
+@ManyToMany(mappedBy="productos")
 private List<Plato> platos = new ArrayList<>();
 
 @ManyToMany(mappedBy="productos")

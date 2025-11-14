@@ -40,6 +40,7 @@ public class Usuario {
     private Genero genero;
     private double peso;
     private double altura;
+    private int edad;
     
     @ManyToOne
     private Ciudad ciudad;

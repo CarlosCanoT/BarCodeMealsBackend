@@ -1,6 +1,5 @@
 package com.tfg.barcodemeals.model;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,6 +43,6 @@ public class Plato {
         joinColumns = @JoinColumn(name = "plato_id"),
         inverseJoinColumns = @JoinColumn(name = "producto_id")
     )
-    private List<Producto> ingredientes = new ArrayList<>();
+    private List<Producto> productos = new ArrayList<>();
 
 }
