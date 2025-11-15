@@ -35,6 +35,7 @@ public class RegistroDiario {
 	private double salTotal; 
 	private double fibraTotal; 
 	private LocalDate fecha;
+	private boolean objetivoCumplido;
 	
 	@ManyToOne
 	private Usuario usuario;

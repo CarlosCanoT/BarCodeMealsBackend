@@ -1,7 +1,6 @@
 package com.tfg.barcodemeals.util;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,7 +86,6 @@ public class Populater implements CommandLineRunner {
         juan.setRegistrosDiarios(new ArrayList<>());
         juan.setReaccionesAdversas(new ArrayList<>());
         usuarioRepository.save(juan);
-
         madrid.getUsuarios().add(juan);
         ciudadRepository.save(madrid);
 
@@ -105,7 +103,6 @@ public class Populater implements CommandLineRunner {
         maria.setRegistrosDiarios(new ArrayList<>());
         maria.setReaccionesAdversas(new ArrayList<>());
         usuarioRepository.save(maria);
-
         barcelona.getUsuarios().add(maria);
         ciudadRepository.save(barcelona);
 
@@ -124,12 +121,61 @@ public class Populater implements CommandLineRunner {
         registroJuan.setUsuario(juan);
         registroJuan.setComidas(new ArrayList<>());
         registroDiarioRepository.save(registroJuan);
-
         juan.getRegistrosDiarios().add(registroJuan);
         usuarioRepository.save(juan);
 
-        // Aquí seguirías con Productos, Platos, Comidas, Supermercados, Precios y Listas de Compra
-        // usando la misma lógica: crear instancia -> setear campos -> guardar -> actualizar relaciones bidireccionales
+        // --- Productos ---
+        Producto leche = new Producto();
+        leche.setNombre("Leche Entera");
+        leche.setMarca("LaLechera");
+        leche.setPlatos(new ArrayList<>());
+        leche.setReaccionesAdversas(new ArrayList<>());
+        productoRepository.save(leche);
+
+        Producto pan = new Producto();
+        pan.setNombre("Pan Integral");
+        pan.setMarca("PanaderiaDelBarrio");
+        pan.setPlatos(new ArrayList<>());
+        pan.setReaccionesAdversas(new ArrayList<>());
+        productoRepository.save(pan);
+
+        // --- Reacciones Adversas ---
+        ReaccionAdversa alergiaLactosa = new ReaccionAdversa();
+        alergiaLactosa.setNombre("Alergia a la Lactosa");
+        alergiaLactosa.setDescripcion("Reacción adversa al consumir productos lácteos.");
+        alergiaLactosa.setUsuarios(new ArrayList<>());
+        alergiaLactosa.setProductos(new ArrayList<>());
+        reaccionAdversaRepository.save(alergiaLactosa);
+
+        ReaccionAdversa intoleranciaGluten = new ReaccionAdversa();
+        intoleranciaGluten.setNombre("Intolerancia al Gluten");
+        intoleranciaGluten.setDescripcion("Reacción adversa al consumir gluten.");
+        intoleranciaGluten.setUsuarios(new ArrayList<>());
+        intoleranciaGluten.setProductos(new ArrayList<>());
+        reaccionAdversaRepository.save(intoleranciaGluten);
+
+        // --- Asociar reacciones a usuarios ---
+        juan.getReaccionesAdversas().add(alergiaLactosa);
+        alergiaLactosa.getUsuarios().add(juan);
+        usuarioRepository.save(juan);
+        reaccionAdversaRepository.save(alergiaLactosa);
+
+        maria.getReaccionesAdversas().add(intoleranciaGluten);
+        intoleranciaGluten.getUsuarios().add(maria);
+        usuarioRepository.save(maria);
+        reaccionAdversaRepository.save(intoleranciaGluten);
+
+        // --- Asociar reacciones a productos ---
+        leche.getReaccionesAdversas().add(alergiaLactosa);
+        alergiaLactosa.getProductos().add(leche);
+        productoRepository.save(leche);
+        reaccionAdversaRepository.save(alergiaLactosa);
+
+        pan.getReaccionesAdversas().add(intoleranciaGluten);
+        intoleranciaGluten.getProductos().add(pan);
+        productoRepository.save(pan);
+        reaccionAdversaRepository.save(intoleranciaGluten);
+
+        // --- Fin del populater ---
     }
 }
-
