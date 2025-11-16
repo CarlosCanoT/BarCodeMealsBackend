@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import com.tfg.barcodemeals.model.*;
 import com.tfg.barcodemeals.repository.*;
 
-@Component
+//@Component
 public class Populater implements CommandLineRunner {
 
     private final UsuarioRepository usuarioRepository;

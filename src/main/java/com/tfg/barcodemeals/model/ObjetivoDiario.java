@@ -22,7 +22,9 @@ public class ObjetivoDiario {
 	private double kcal;
 	private double proteina;
 	private double hidratosCarbono;
+	private double azucar;
 	private double grasa;
+	private double sal;
 	
 	
     @OneToOne(mappedBy = "objetivoDiario") 
