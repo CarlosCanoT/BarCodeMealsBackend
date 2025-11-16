@@ -57,8 +57,6 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RegistroDiario> registrosDiarios = new ArrayList<>();
     
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "objetivo_id", referencedColumnName = "id")
-    private ObjetivoDiario objetivoDiario;
-
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ObjetivoDiario> objetivosDiarios = new ArrayList<>();
 }
