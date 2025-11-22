@@ -25,6 +25,7 @@ public class RegistroDiario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	private double pesoTotal;
 	private double kcalTotal;
 	private double grasaTotal;
 	private double saturadaTotal;
@@ -34,6 +35,7 @@ public class RegistroDiario {
 	private double azucarTotal; 
 	private double salTotal; 
 	private double fibraTotal; 
+	
 	private LocalDate fecha;
 	private boolean objetivoCumplido;
 	
@@ -41,6 +43,18 @@ public class RegistroDiario {
 	private Usuario usuario;
 	
 	  @OneToMany(mappedBy="registroDiario", cascade = CascadeType.ALL, orphanRemoval = true)
-	    private List<Comida> comidas = new ArrayList<>();
-
+	  private List<Comida> comidas = new ArrayList<>();
+	  
+	  public void recalcularTotales() {
+		  	pesoTotal = comidas.stream().mapToDouble(Comida::getPeso).sum();
+	        kcalTotal = comidas.stream().mapToDouble(Comida::getKcal).sum();
+	        grasaTotal = comidas.stream().mapToDouble(Comida::getGrasa).sum();
+	        saturadaTotal = comidas.stream().mapToDouble(Comida::getSaturada).sum();
+	        noSaturadaTotal = comidas.stream().mapToDouble(Comida::getNoSaturada).sum();
+	        proteinaTotal = comidas.stream().mapToDouble(Comida::getProteina).sum();
+	        hidratosCarbonoTotal = comidas.stream().mapToDouble(Comida::getHidratosCarbono).sum();
+	        azucarTotal = comidas.stream().mapToDouble(Comida::getAzucar).sum();
+	        salTotal = comidas.stream().mapToDouble(Comida::getSal).sum();
+	        fibraTotal = comidas.stream().mapToDouble(Comida::getFibra).sum();
+	    }
 }

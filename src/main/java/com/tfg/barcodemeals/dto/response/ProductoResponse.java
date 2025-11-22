@@ -2,13 +2,16 @@ package com.tfg.barcodemeals.dto.response;
 
 import java.util.List;
 
+import com.tfg.barcodemeals.model.ReaccionAdversa;
+
 public record ProductoResponse(
 	    Long id,
 	    String barcode,
 	    String nombre,
 	    String marca,
 	    String categoria,
-	    double peso,
+	    double pesoEmpaque,
+	    double pesoConsumido,
 	    Double kcal,
 	    double grasa,
 	    Double saturada,
@@ -20,6 +23,6 @@ public record ProductoResponse(
 	    Double fibra,
 	    String unidad,  
 	    String envase, 
-	    List<String> reaccionesAdversas,
-	    List<Double> precios
+	    List<Long> reaccionesAdversaIds,
+	    List<Long> precioIds
 ) {}

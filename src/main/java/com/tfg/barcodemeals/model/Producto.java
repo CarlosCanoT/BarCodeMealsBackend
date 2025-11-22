@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "producto")
-public class Producto {
+public class Producto implements ValorNutricional{
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 private Long id;
@@ -35,8 +35,10 @@ private String barcode;
 private String nombre;
 private String marca;
 private String categoria;
+private double pesoEmpaque;
 @Column(nullable = false)
-private double peso;
+private double pesoConsumido;
+@Column(nullable = false)
 private double kcal;
 @Column(nullable = false)
 private double grasa;
@@ -75,4 +77,27 @@ private List<Comida> comidas = new ArrayList<>();
 private List<Precio> precios = new ArrayList<>();
 
 
+private double indice() {
+    return pesoConsumido / 100.0; // los valores son por cada 100g
+}
+@Override
+public double getPeso() { return pesoConsumido; }
+@Override
+public double getKcal() { return kcal * indice(); }
+@Override
+public double getGrasa() { return grasa * indice();}
+@Override
+public double getSaturada() { return saturada * indice(); }
+@Override
+public double getNoSaturada() { return noSaturada * indice(); }
+@Override
+public double getProteina() { return proteina * indice();}
+@Override
+public double getHidratosCarbono() { return hidratosCarbono * indice();}
+@Override
+public double getAzucar() { return azucar * indice();}
+@Override
+public double getSal() { return sal * indice(); }
+@Override
+public double getFibra() { return fibra * indice();}
 }

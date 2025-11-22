@@ -8,7 +8,7 @@ public record CiudadResponse(
 	String provincia,
 	String pais,
 	String codigoPostal,
-	List<SupermercadoResponse> supermercados
+	List<Long> supermercadoIds
 
 ) {}
 

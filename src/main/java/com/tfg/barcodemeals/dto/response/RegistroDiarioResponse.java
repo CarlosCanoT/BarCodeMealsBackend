@@ -17,5 +17,5 @@ public record RegistroDiarioResponse (
        LocalDate fecha,
        boolean objetivoCumplido,
        Long usuarioId,
-       List<ComidaResponse> comidas
+       List<Long> comidaIds
 ) {}

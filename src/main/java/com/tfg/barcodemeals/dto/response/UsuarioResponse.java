@@ -15,6 +15,6 @@ public record UsuarioResponse(
 	    double peso,
 	    double altura,
 	    String ciudadNombre,
-	    List<String> reaccionesAdversas 
+	    List<Long> reaccionesAdversaIds 
 ) {}
 

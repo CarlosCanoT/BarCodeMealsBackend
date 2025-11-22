@@ -8,5 +8,5 @@ public record ListaCompraResponse(
 	    String nombre,
 	    LocalDate fechaCreacion,
 	    double precioTotal,
-	    List<LineaCompraResponse> lineas
+	    List<Long> lineaIds
 ) {}
