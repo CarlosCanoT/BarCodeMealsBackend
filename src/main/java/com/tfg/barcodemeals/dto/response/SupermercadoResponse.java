@@ -9,7 +9,7 @@ public record SupermercadoResponse(
 	    String telefono,
 	    String web,
 	    double rating,
-	    String ciudad,
+	    Long ciudad,
 	    LocalTime horaApertura,
 	    LocalTime horaCierre
 ) {}

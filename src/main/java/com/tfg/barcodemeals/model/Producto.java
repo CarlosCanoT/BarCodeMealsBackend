@@ -34,7 +34,8 @@ private String barcode;
 @Column(nullable = false)
 private String nombre;
 private String marca;
-private String categoria;
+@Enumerated(EnumType.STRING)
+private CategoriaProducto categoria;
 private double pesoEmpaque;
 @Column(nullable = false)
 private double pesoConsumido;
@@ -45,10 +46,10 @@ private double grasa;
 private double saturada;
 private double noSaturada;
 @Column(nullable = false)
-private double proteina;
-@Column(nullable = false)
 private double hidratosCarbono; 
 private double azucar; 
+@Column(nullable = false)
+private double proteina;
 private double sal; 
 private double fibra; 
 
@@ -91,11 +92,11 @@ public double getSaturada() { return saturada * indice(); }
 @Override
 public double getNoSaturada() { return noSaturada * indice(); }
 @Override
-public double getProteina() { return proteina * indice();}
-@Override
 public double getHidratosCarbono() { return hidratosCarbono * indice();}
 @Override
 public double getAzucar() { return azucar * indice();}
+@Override
+public double getProteina() { return proteina * indice();}
 @Override
 public double getSal() { return sal * indice(); }
 @Override

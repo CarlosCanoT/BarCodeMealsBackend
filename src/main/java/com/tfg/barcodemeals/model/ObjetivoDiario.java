@@ -21,10 +21,10 @@ public class ObjetivoDiario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private double kcal;
-	private double proteina;
+	private double grasa;
 	private double hidratosCarbono;
 	private double azucar;
-	private double grasa;
+	private double proteina;
 	private double sal;
 	
 	

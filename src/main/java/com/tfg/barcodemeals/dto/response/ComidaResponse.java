@@ -14,9 +14,9 @@ public record ComidaResponse(
 	    double grasa,
 	    double saturada,
 	    double noSaturada,
-	    double proteina,
 	    double hidratosCarbono,
 	    double azucar,
+	    double proteina,
 	    double sal,
 	    double fibra
 ) {}

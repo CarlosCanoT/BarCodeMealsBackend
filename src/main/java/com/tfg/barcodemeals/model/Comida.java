@@ -77,11 +77,6 @@ public class Comida implements ValorNutricional{
                productos.stream().mapToDouble(ValorNutricional::getNoSaturada).sum();
     }
     @Override
-    public double getProteina() {
-        return platos.stream().mapToDouble(ValorNutricional::getProteina).sum() +
-               productos.stream().mapToDouble(ValorNutricional::getProteina).sum();
-    }
-    @Override
     public double getHidratosCarbono() {
         return platos.stream().mapToDouble(ValorNutricional::getHidratosCarbono).sum() +
                productos.stream().mapToDouble(ValorNutricional::getHidratosCarbono).sum();
@@ -90,6 +85,11 @@ public class Comida implements ValorNutricional{
     public double getAzucar() {
         return platos.stream().mapToDouble(ValorNutricional::getAzucar).sum() +
                productos.stream().mapToDouble(ValorNutricional::getAzucar).sum();
+    }
+    @Override
+    public double getProteina() {
+    	return platos.stream().mapToDouble(ValorNutricional::getProteina).sum() +
+    			productos.stream().mapToDouble(ValorNutricional::getProteina).sum();
     }
     @Override
     public double getSal() {

@@ -1,6 +1,7 @@
 package com.tfg.barcodemeals.model;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,4 +59,8 @@ public class Usuario {
     
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ObjetivoDiario> objetivosDiarios = new ArrayList<>();
+    
+    private int calcularEdad() {
+        return Period.between(fechaNacimiento, LocalDate.now()).getYears();
+    }
 }

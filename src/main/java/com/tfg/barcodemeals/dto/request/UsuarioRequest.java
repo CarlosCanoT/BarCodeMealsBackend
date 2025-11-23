@@ -11,9 +11,8 @@ public record UsuarioRequest(
 	    String telefono,
 	    LocalDate fechaNacimiento,
 	    String genero,
-	    Double peso,
-	    Double altura,
-	    Integer edad,
+	    double peso,
+	    double altura,
 	    Long ciudadId,
 	    List<Long> reaccionesAdversasIds  
 ) {}

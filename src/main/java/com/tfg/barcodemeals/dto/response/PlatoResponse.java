@@ -13,11 +13,10 @@ public record PlatoResponse(
 	    double grasa,
 	    double saturada,
 	    double noSaturada,
-	    double proteina,
 	    double hidratosCarbono,
 	    double azucar,
+	    double proteina,
 	    double sal,
 	    double fibra,
-	    List<Long> reaccionesAdversaIds, 
 	    List<Long> productoIds  
 ) {}

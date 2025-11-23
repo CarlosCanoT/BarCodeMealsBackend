@@ -24,13 +24,11 @@ public class ReaccionAdversa {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String nombre;
+	@Enumerated(EnumType.STRING)
+	 private TipoReaccion tipo;
 	 @Enumerated(EnumType.STRING)
 	 private NivelRiesgo nivelRiesgo;
-	 @Enumerated(EnumType.STRING)
-	 private TipoReaccion tipo;
 	 private String descripcion;
-	
 	 @ManyToMany(mappedBy = "reaccionesAdversas")
 	 private List<Usuario> usuarios = new ArrayList<>();
 	 

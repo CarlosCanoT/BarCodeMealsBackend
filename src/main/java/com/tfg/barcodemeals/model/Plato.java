@@ -46,11 +46,11 @@ public class Plato implements ValorNutricional{
     @Override
     public double getNoSaturada() { return productos.stream().mapToDouble(Producto::getNoSaturada).sum(); }
     @Override
-    public double getProteina() { return productos.stream().mapToDouble(Producto::getProteina).sum(); }
-    @Override
     public double getHidratosCarbono() { return productos.stream().mapToDouble(Producto::getHidratosCarbono).sum(); }
     @Override
     public double getAzucar() { return productos.stream().mapToDouble(Producto::getAzucar).sum(); }
+    @Override
+    public double getProteina() { return productos.stream().mapToDouble(Producto::getProteina).sum(); }
     @Override
     public double getSal() { return productos.stream().mapToDouble(Producto::getSal).sum(); }
     @Override

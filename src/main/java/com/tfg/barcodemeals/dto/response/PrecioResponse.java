@@ -9,7 +9,5 @@ public record PrecioResponse(
 	    boolean oferta,
 	    double descuento,
 	    Long productoId,
-	    String productoNombre,
-	    Long supermercadoId,
-	    String supermercadoNombre
+	    Long supermercadoId
 ) {}

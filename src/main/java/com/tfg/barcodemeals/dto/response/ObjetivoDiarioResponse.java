@@ -1,10 +1,12 @@
 package com.tfg.barcodemeals.dto.response;
 
 public record ObjetivoDiarioResponse (
+		 Long id,
 		 double kcal,
-		 double proteina,
+		 double grasa,
 		 double hidratosCarbono,
 		 double azucar,
-		 double grasa,
-		 double sal	
+		 double proteina,
+		 double sal,
+		 Long usuarioId
 ) {}

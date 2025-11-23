@@ -6,9 +6,9 @@ public interface ValorNutricional {
     double getGrasa();
     double getSaturada();
     double getNoSaturada();
-    double getProteina();
     double getHidratosCarbono();
     double getAzucar();
+    double getProteina();
     double getSal();
     double getFibra();
 }
