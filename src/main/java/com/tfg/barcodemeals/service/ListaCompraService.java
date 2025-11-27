@@ -46,14 +46,20 @@ public class ListaCompraService implements CrudService<ListaCompraResponse, List
 	
 	@Override
 	public Optional<ListaCompraResponse> actualizar(Long id, ListaCompraRequest request) {
-		return Optional.empty();
+		return listaCompraRepository.findById(id)
+		        .map(listaCompra -> {
+		        listaCompra.setNombre(request.nombre());
+		        return listaCompraMapper.toResponse(listaCompraRepository.save(listaCompra));
+		        });
+		
 	}
 	
 	@Override
 	public boolean eliminar(Long id) {
-		// TODO Auto-generated method stub
-		return false;
+		return listaCompraRepository.findById(id)
+				.map(l -> {
+				listaCompraRepository.delete(l);
+				return true;
+				}).orElse(false);
 	}
-	
-	
 }

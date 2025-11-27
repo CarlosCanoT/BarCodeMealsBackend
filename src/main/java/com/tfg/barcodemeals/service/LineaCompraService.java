@@ -63,14 +63,14 @@ public class LineaCompraService implements CrudService<LineaCompraResponse, Line
 				productoRepository.findById(request.productoId())
 			    .ifPresent(lineaCompra::setProducto);
 	            return lineaCompraMapper.toResponse(lineaCompraRepository.save(lineaCompra));
-				});
+			});
 	}
 
 	@Override
 	public boolean eliminar(Long id) {
 		return lineaCompraRepository.findById(id)
-				.map(p -> {
-				lineaCompraRepository.delete(p);
+				.map(l -> {
+				lineaCompraRepository.delete(l);
 				return true;
 				}).orElse(false);
 	}
