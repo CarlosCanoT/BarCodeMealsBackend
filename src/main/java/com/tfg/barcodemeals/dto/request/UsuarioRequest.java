@@ -4,15 +4,16 @@ import java.time.LocalDate;
 import java.util.List;
 
 public record UsuarioRequest(
-	    String nombreUsuario,
-	    String contrasena,
-	    String apodo,
-	    String email,
-	    String telefono,
-	    LocalDate fechaNacimiento,
-	    String genero,
-	    double peso,
-	    double altura,
-	    Long ciudadId,
-	    List<Long> reaccionesAdversasIds  
+        Long id,                        
+        String nombreUsuario,
+        String contrasena,               
+        String apodo,
+        String email,
+        String telefono,
+        LocalDate fechaNacimiento,
+        String genero,                
+        double peso,
+        double altura,
+        Long ciudadId,                  
+        List<Long> reaccionesAdversasIds 
 ) {}

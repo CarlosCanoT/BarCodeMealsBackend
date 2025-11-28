@@ -29,7 +29,6 @@ public class Supermercado {
 	private String direccion;
 	private String telefono;
 	private String web;
-	private double rating;
 	private LocalTime horaApertura;
 	private LocalTime horaCierre;
 	

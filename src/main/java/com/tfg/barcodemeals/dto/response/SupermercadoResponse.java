@@ -8,7 +8,6 @@ public record SupermercadoResponse(
 	    String direccion,
 	    String telefono,
 	    String web,
-	    double rating,
 	    Long ciudad,
 	    LocalTime horaApertura,
 	    LocalTime horaCierre

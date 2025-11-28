@@ -26,8 +26,6 @@ public class ReaccionAdversa {
 	private Long id;
 	@Enumerated(EnumType.STRING)
 	 private TipoReaccion tipo;
-	 @Enumerated(EnumType.STRING)
-	 private NivelRiesgo nivelRiesgo;
 	 private String descripcion;
 	 @ManyToMany(mappedBy = "reaccionesAdversas")
 	 private List<Usuario> usuarios = new ArrayList<>();

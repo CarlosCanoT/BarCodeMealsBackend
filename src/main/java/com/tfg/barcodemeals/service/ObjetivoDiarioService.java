@@ -1,4 +1,4 @@
-package com.tfg.barcodemeals.repository;
+package com.tfg.barcodemeals.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,7 +9,8 @@ import com.tfg.barcodemeals.dto.request.ObjetivoDiarioRequest;
 import com.tfg.barcodemeals.dto.response.ObjetivoDiarioResponse;
 import com.tfg.barcodemeals.mapper.ObjetivoDiarioMapper;
 import com.tfg.barcodemeals.model.ObjetivoDiario;
-import com.tfg.barcodemeals.service.CrudService;
+import com.tfg.barcodemeals.repository.ObjetivoDiarioRepository;
+import com.tfg.barcodemeals.repository.UsuarioRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -47,7 +48,7 @@ public class ObjetivoDiarioService implements CrudService<ObjetivoDiarioResponse
 	objetivoDiario.setProteina(request.proteina());
 	objetivoDiario.setSal(request.sal());
 	objetivoDiario.setUsuario(usuarioRepository.findById(request.usuarioId())
-            .orElseThrow(() -> new RuntimeException("Lista no encontrada")));
+            .orElseThrow(() -> new RuntimeException("Usuario no encontrado")));
 	return objetivoDiarioMapper.toResponse(objetivoDiarioRepository.save(objetivoDiario));
 	}
 

@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 public class UsuarioMapper {
 
-    public static UsuarioResponse toResponse(Usuario usuario) {
+    public UsuarioResponse toResponse(Usuario usuario) {
         if (usuario == null) return null;
         return new UsuarioResponse(
                 usuario.getId(),
@@ -34,9 +34,10 @@ public class UsuarioMapper {
                 		.collect(Collectors.toList())
         );
     }
-    public static UsuarioRequest toRequest(Usuario usuario) {
+    public UsuarioRequest toRequest(Usuario usuario) {
     	  if (usuario == null) return null;
     	  return new UsuarioRequest(
+    			  usuario.getId(),
     			  usuario.getNombreUsuario(),
     			  usuario.getContrasena(),
     			  usuario.getApodo(),
