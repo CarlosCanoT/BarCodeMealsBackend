@@ -23,7 +23,7 @@ public class CiudadService {
                 .map(ciudadMapper::toResponse);
     }
     
-    public List<CiudadResponse> obtenerTodas() {
+    public List<CiudadResponse> obtenerTodos() {
         return ciudadRepository.findAll()
                 .stream()
                 .map(ciudadMapper::toResponse)

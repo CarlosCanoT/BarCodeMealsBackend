@@ -3,6 +3,7 @@ package com.tfg.barcodemeals.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,22 +42,21 @@ public class ProductoController implements CrudController<ProductoResponse, Prod
 	@Override
 	@PostMapping
 	public ResponseEntity<ProductoResponse> crear(@RequestBody ProductoRequest request) {
-		ProductoResponse creado = productoService.crear(request);
-		return ResponseEntity.ok(creado);
+		return ResponseEntity.ok(productoService.crear(request));
 	}
 
 	@Override
 	@PutMapping("/{id}")
-	public ResponseEntity<ProductoResponse> actualizar(@PathVariable Long id,@RequestBody ProductoRequest request) {
+	public ResponseEntity<ProductoResponse> actualizar(@PathVariable Long id, @RequestBody ProductoRequest request) {
 		return productoService.actualizar(id, request)
 				.map(ResponseEntity::ok)
 				.orElseGet(() -> ResponseEntity.notFound().build()); 
 	}
 
-	@Override
-	public ResponseEntity<Void> eliminar(Long id) {
-		boolean eliminado = productoService.eliminar(id);
-		return eliminado ? ResponseEntity.noContent().build()
+    @Override
+    @DeleteMapping("/{id}")
+	public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+		return productoService.eliminar(id) ? ResponseEntity.noContent().build()
 					     : ResponseEntity.notFound().build();
 	}
 
