@@ -59,5 +59,4 @@ public class RegistroDiarioController implements CrudController<RegistroDiarioRe
 		return registroDiarioService.eliminar(id) ? ResponseEntity.noContent().build()
 			     : ResponseEntity.notFound().build();
 	}
-
 }

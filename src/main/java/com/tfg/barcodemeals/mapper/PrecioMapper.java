@@ -1,8 +1,11 @@
 package com.tfg.barcodemeals.mapper;
 
+import org.springframework.stereotype.Component;
+
 import com.tfg.barcodemeals.dto.response.PrecioResponse;
 import com.tfg.barcodemeals.model.Precio;
 
+@Component
 public class PrecioMapper {
 public PrecioResponse toResponse(Precio precio) {
 	if(precio == null) return null;

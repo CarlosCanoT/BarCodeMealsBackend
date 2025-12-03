@@ -1,6 +1,5 @@
 package com.tfg.barcodemeals.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -28,8 +27,8 @@ public class ReaccionAdversa {
 	 private TipoReaccion tipo;
 	 private String descripcion;
 	 @ManyToMany(mappedBy = "reaccionesAdversas")
-	 private List<Usuario> usuarios = new ArrayList<>();
+	 private List<Usuario> usuarios;
 	 
 	 @ManyToMany(mappedBy = "reaccionesAdversas")
-	 private List<Producto> productos = new ArrayList<>();
+	 private List<Producto> productos;
 }

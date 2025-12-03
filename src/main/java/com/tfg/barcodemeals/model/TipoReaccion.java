@@ -35,7 +35,6 @@ public enum TipoReaccion {
     
     @Override
     public String toString() {
-        // Convierte ENUM a algo más “legible”
         return name().replace('_', ' ').toLowerCase();
     }
 }

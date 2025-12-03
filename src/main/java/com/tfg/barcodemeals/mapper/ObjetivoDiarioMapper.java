@@ -1,9 +1,12 @@
 package com.tfg.barcodemeals.mapper;
 
+import org.springframework.stereotype.Component;
+
 import com.tfg.barcodemeals.dto.request.ObjetivoDiarioRequest;
 import com.tfg.barcodemeals.dto.response.ObjetivoDiarioResponse;
 import com.tfg.barcodemeals.model.ObjetivoDiario;
 
+@Component
 public class ObjetivoDiarioMapper {
 public ObjetivoDiarioResponse toResponse(ObjetivoDiario objetivoDiario) {
 	if(objetivoDiario == null) return null;

@@ -4,10 +4,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Component;
+
 import com.tfg.barcodemeals.dto.request.ListaCompraRequest;
 import com.tfg.barcodemeals.dto.response.ListaCompraResponse;
 import com.tfg.barcodemeals.model.ListaCompra;
 
+@Component
 public class ListaCompraMapper {
 public ListaCompraResponse toResponse(ListaCompra listaCompra) {
 	if(listaCompra == null) return null;

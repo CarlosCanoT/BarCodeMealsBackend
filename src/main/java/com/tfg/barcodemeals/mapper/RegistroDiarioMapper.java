@@ -4,10 +4,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Component;
+
 import com.tfg.barcodemeals.dto.request.RegistroDiarioRequest;
 import com.tfg.barcodemeals.dto.response.RegistroDiarioResponse;
 import com.tfg.barcodemeals.model.RegistroDiario;
 
+@Component
 public class RegistroDiarioMapper {
 public RegistroDiarioResponse toResponse(RegistroDiario registroDiario) {
 	if(registroDiario == null) return null;

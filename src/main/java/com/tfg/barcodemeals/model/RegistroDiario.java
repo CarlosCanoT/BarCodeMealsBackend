@@ -43,7 +43,7 @@ public class RegistroDiario {
 	private Usuario usuario;
 	
 	  @OneToMany(mappedBy="registroDiario", cascade = CascadeType.ALL, orphanRemoval = true)
-	  private List<Comida> comidas = new ArrayList<>();
+	  private List<Comida> comidas;
 	  
 	  public void recalcularTotales() {
 		  	pesoTotal = comidas.stream().mapToDouble(Comida::getPeso).sum();

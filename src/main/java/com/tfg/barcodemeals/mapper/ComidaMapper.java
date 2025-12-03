@@ -4,10 +4,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Component;
+
 import com.tfg.barcodemeals.dto.request.ComidaRequest;
 import com.tfg.barcodemeals.dto.response.ComidaResponse;
 import com.tfg.barcodemeals.model.Comida;
 
+@Component
 public class ComidaMapper {
 public ComidaResponse toResponse(Comida comida) {
 	if(comida == null) return null;

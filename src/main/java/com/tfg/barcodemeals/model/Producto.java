@@ -1,6 +1,5 @@
 package com.tfg.barcodemeals.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.JoinColumn;
@@ -29,7 +28,7 @@ public class Producto implements ValorNutricional{
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 private Long id;
-@Column(nullable = true, unique = false)
+@Column(nullable = true, unique = true)
 private String barcode;
 @Column(nullable = false)
 private String nombre;
@@ -65,17 +64,16 @@ private Envase envase;
     joinColumns = @JoinColumn(name = "producto_id"),
     inverseJoinColumns = @JoinColumn(name = "reaccion_adversa_id")
 )
-
-private List<ReaccionAdversa> reaccionesAdversas = new ArrayList<>();
-
-@ManyToMany(mappedBy="productos")
-private List<Plato> platos = new ArrayList<>();
+private List<ReaccionAdversa> reaccionesAdversas;
 
 @ManyToMany(mappedBy="productos")
-private List<Comida> comidas = new ArrayList<>();
+private List<Plato> platos;
+
+@ManyToMany(mappedBy="productos")
+private List<Comida> comidas;
 
 @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
-private List<Precio> precios = new ArrayList<>();
+private List<Precio> precios;
 
 
 private double indice() {
@@ -92,13 +90,13 @@ public double getSaturada() { return saturada * indice(); }
 @Override
 public double getNoSaturada() { return noSaturada * indice(); }
 @Override
-public double getHidratosCarbono() { return hidratosCarbono * indice();}
+public double getHidratosCarbono() { return hidratosCarbono * indice(); }
 @Override
-public double getAzucar() { return azucar * indice();}
+public double getAzucar() { return azucar * indice(); }
 @Override
-public double getProteina() { return proteina * indice();}
+public double getProteina() { return proteina * indice(); }
 @Override
 public double getSal() { return sal * indice(); }
 @Override
-public double getFibra() { return fibra * indice();}
+public double getFibra() { return fibra * indice(); }
 }

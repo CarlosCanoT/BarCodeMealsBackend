@@ -34,7 +34,7 @@ public class Plato implements ValorNutricional{
         joinColumns = @JoinColumn(name = "plato_id"),
         inverseJoinColumns = @JoinColumn(name = "producto_id")
     )
-    private List<Producto> productos = new ArrayList<>();
+    private List<Producto> productos;
     @Override
     public double getPeso() { return productos.stream().mapToDouble(Producto::getPeso).sum(); }
     @Override

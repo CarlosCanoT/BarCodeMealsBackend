@@ -40,7 +40,7 @@ public class Comida implements ValorNutricional{
         joinColumns = @JoinColumn(name = "comida_id"),
         inverseJoinColumns = @JoinColumn(name = "plato_id")
     )
-    private List<Plato> platos = new ArrayList<>();
+    private List<Plato> platos;
     
     @ManyToMany
     @JoinTable(
@@ -48,7 +48,7 @@ public class Comida implements ValorNutricional{
         joinColumns = @JoinColumn(name = "comida_id"),
         inverseJoinColumns = @JoinColumn(name = "producto_id")
     )
-    private List<Producto> productos = new ArrayList<>();
+    private List<Producto> productos;
     
     @Override
     public double getPeso() {

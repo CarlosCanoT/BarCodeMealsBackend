@@ -4,10 +4,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Component;
+
 import com.tfg.barcodemeals.dto.request.PlatoRequest;
 import com.tfg.barcodemeals.dto.response.PlatoResponse;
 import com.tfg.barcodemeals.model.Plato;
 
+@Component
 public class PlatoMapper {
 	public PlatoResponse toResponse(Plato plato) {
 		if(plato == null) return null;

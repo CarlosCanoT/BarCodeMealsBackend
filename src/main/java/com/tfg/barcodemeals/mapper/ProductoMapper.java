@@ -4,10 +4,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Component;
+
 import com.tfg.barcodemeals.dto.request.ProductoRequest;
 import com.tfg.barcodemeals.dto.response.ProductoResponse;
 import com.tfg.barcodemeals.model.Producto;
 
+@Component
 public class ProductoMapper {
 public ProductoResponse toResponse(Producto producto) {
 	if(producto == null) return null;

@@ -4,9 +4,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Component;
+
 import com.tfg.barcodemeals.dto.response.CiudadResponse;
 import com.tfg.barcodemeals.model.Ciudad;
 
+@Component
 public class CiudadMapper {
 public CiudadResponse toResponse(Ciudad ciudad) {
 	if(ciudad == null) return null;
