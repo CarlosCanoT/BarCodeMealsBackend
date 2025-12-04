@@ -12,6 +12,7 @@ public LineaCompraResponse toResponse(LineaCompra lineaCompra) {
 	if(lineaCompra==null) return null;
 	
 	return new LineaCompraResponse(
+			lineaCompra.getId(),
 			lineaCompra.getCantidad(),
 			lineaCompra.isComprado(),
 			lineaCompra.getPrecioLinea(),
@@ -24,6 +25,7 @@ public LineaCompraRequest toRequest(LineaCompra lineaCompra) {
 	if(lineaCompra==null) return null;
 	
 	return new LineaCompraRequest(
+			lineaCompra.getId(),
 			lineaCompra.getCantidad(),
 			lineaCompra.isComprado(),
 			lineaCompra.getListaCompra().getId(),

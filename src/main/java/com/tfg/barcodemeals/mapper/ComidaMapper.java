@@ -45,6 +45,7 @@ public ComidaResponse toResponse(Comida comida) {
 public ComidaRequest toRequest(Comida comida) {
 	if(comida==null) return null;
 	return new ComidaRequest(
+			comida.getId(),
 			comida.getTipo().toString(),
 			comida.getFecha(),
 			Optional.ofNullable(comida.getPlatos())

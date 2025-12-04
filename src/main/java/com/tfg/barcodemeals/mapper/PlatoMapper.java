@@ -41,6 +41,7 @@ public class PlatoMapper {
 		if(plato == null) return null;
 	
 		return new PlatoRequest(
+				plato.getId(),
 				plato.getNombre(),
 				plato.getDescripcion(),
 				Optional.ofNullable(plato.getProductos())
