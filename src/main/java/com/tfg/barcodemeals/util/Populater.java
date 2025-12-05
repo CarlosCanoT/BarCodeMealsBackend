@@ -1,6 +1,7 @@
 package com.tfg.barcodemeals.util;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -16,7 +17,8 @@ import com.tfg.barcodemeals.model.Envase;
 import com.tfg.barcodemeals.model.Plato;
 import com.tfg.barcodemeals.model.Producto;
 import com.tfg.barcodemeals.model.ReaccionAdversa;
-import com.tfg.barcodemeals.model.RegistroDiario; 
+import com.tfg.barcodemeals.model.RegistroDiario;
+import com.tfg.barcodemeals.model.Supermercado;
 import com.tfg.barcodemeals.model.TipoComida; 
 import com.tfg.barcodemeals.model.TipoReaccion;
 import com.tfg.barcodemeals.model.UnidadMedida;
@@ -26,7 +28,8 @@ import com.tfg.barcodemeals.repository.ComidaRepository;
 import com.tfg.barcodemeals.repository.PlatoRepository;
 import com.tfg.barcodemeals.repository.ProductoRepository;
 import com.tfg.barcodemeals.repository.ReaccionAdversaRepository;
-import com.tfg.barcodemeals.repository.RegistroDiarioRepository; 
+import com.tfg.barcodemeals.repository.RegistroDiarioRepository;
+import com.tfg.barcodemeals.repository.SupermercadoRepository;
 import com.tfg.barcodemeals.repository.UsuarioRepository; 
 import com.tfg.barcodemeals.model.Genero; 
 
@@ -40,6 +43,7 @@ public class Populater implements CommandLineRunner {
     private final ComidaRepository comidaRepository;
     private final RegistroDiarioRepository registroDiarioRepository;
     private final UsuarioRepository usuarioRepository;
+    private final SupermercadoRepository supermercadoRepository;
     
     public Populater(
             ReaccionAdversaRepository reaccionAdversaRepository, 
@@ -48,7 +52,9 @@ public class Populater implements CommandLineRunner {
             PlatoRepository platoRepository,
             ComidaRepository comidaRepository, 
             RegistroDiarioRepository registroDiarioRepository, 
-            UsuarioRepository usuarioRepository 
+            UsuarioRepository usuarioRepository,
+            SupermercadoRepository supermercadoRepository
+            
     ) {
     	this.reaccionAdversaRepository = reaccionAdversaRepository;      
     	this.ciudadRepository = ciudadRepository;
@@ -57,6 +63,7 @@ public class Populater implements CommandLineRunner {
         this.comidaRepository = comidaRepository; 
         this.registroDiarioRepository = registroDiarioRepository; 
         this.usuarioRepository = usuarioRepository; 
+        this.supermercadoRepository = supermercadoRepository;
     }
 
     @Override
@@ -69,15 +76,18 @@ public class Populater implements CommandLineRunner {
         platoRepository.deleteAll();
         productoRepository.deleteAll();
         reaccionAdversaRepository.deleteAll(); 
+        supermercadoRepository.deleteAll();
         ciudadRepository.deleteAll();
         // ---------------------------------------------------
         
         // --- CREACIÓN EN ORDEN DE DEPENDENCIA ---
         crearReaccionesAdversas();
-    	crearCiudades();           
+    	crearCiudades();   
+    	crearUsuarios();
     	crearProductos();          
     	crearPlatos();
         crearComidasYRegistros(); 
+        crearSupermercados();
     }
 
     // =======================================================================
@@ -157,7 +167,38 @@ public class Populater implements CommandLineRunner {
     // =======================================================================
     // --- MÉTODOS AUXILIARES ---
     // =======================================================================
-    
+    private void crearUsuarios() {
+        // Obtener una ciudad base
+        Ciudad ciudadBase = ciudadRepository.findAll().stream().findFirst().orElse(null);
+        
+        if (ciudadBase == null) {
+            System.err.println("No hay ciudades disponibles para asignar a los usuarios.");
+            return;
+        }
+
+        // Crear usuarios de ejemplo
+        List<Usuario> usuarios = List.of(
+            new Usuario(null, "anaPerez", "password123", "Ana Pérez", "ana@tfg.com", "600654321",
+                    LocalDate.of(1995, 6, 15), Genero.FEMENINO, 60.0, 165.0, 28,
+                    ciudadBase, new ArrayList<>(), new ArrayList<>(), new ArrayList<>()),
+            new Usuario(null, "juanLopez", "1234abcd", "Juan López", "juan@tfg.com", "600987654",
+                    LocalDate.of(1988, 3, 22), Genero.MASCULINO, 82.0, 175.0, 36,
+                    ciudadBase, new ArrayList<>(), new ArrayList<>(), new ArrayList<>())
+        );
+
+        // Guardar usuarios y crear registros diarios vacíos
+        for (Usuario usuario : usuarios) {
+            Usuario u = usuarioRepository.save(usuario);
+
+            // Crear registro diario vacío
+            RegistroDiario registro = new RegistroDiario(
+                null, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+                LocalDate.now(), false, u, new ArrayList<>()
+            );
+            registroDiarioRepository.save(registro);
+        }
+    }
+
     private void crearReaccionesAdversas() {
         for (TipoReaccion tipo : TipoReaccion.values()) {
             Optional<ReaccionAdversa> existing = reaccionAdversaRepository.findByTipo(tipo);
@@ -170,6 +211,31 @@ public class Populater implements CommandLineRunner {
                 reaccionAdversaRepository.save(ra); 
             }
         }
+    }
+    
+    private void crearSupermercados() {
+        // Crear ciudad Almendralejo si no existe
+        Ciudad almendralejo = ciudadRepository.findAll()
+                .stream()
+                .filter(c -> c.getNombre().equals("Almendralejo"))
+                .findFirst()
+                .orElseGet(() -> {
+                    Ciudad nuevaCiudad = new Ciudad(null, "Almendralejo", "Badajoz", "España", "06200", new ArrayList<>(), new ArrayList<>());
+                    return ciudadRepository.save(nuevaCiudad);
+                });
+
+        // Lista de supermercados
+        List<Supermercado> supermercados = List.of(
+            new Supermercado(null, "Aldi", "Calle Falsa 1", "600111222", "www.aldi.es", LocalTime.of(9,0), LocalTime.of(21,0), almendralejo, new ArrayList<>()),
+            new Supermercado(null, "Dia", "Calle Falsa 2", "600222333", "www.dia.es", LocalTime.of(9,0), LocalTime.of(21,0), almendralejo, new ArrayList<>()),
+            new Supermercado(null, "Mercadona", "Calle Falsa 3", "600333444", "www.mercadona.es", LocalTime.of(9,0), LocalTime.of(21,0), almendralejo, new ArrayList<>()),
+            new Supermercado(null, "Lidl", "Calle Falsa 4", "600444555", "www.lidl.es", LocalTime.of(9,0), LocalTime.of(21,0), almendralejo, new ArrayList<>()),
+            new Supermercado(null, "Carrefour", "Calle Falsa 5", "600555666", "www.carrefour.es", LocalTime.of(9,0), LocalTime.of(22,0), almendralejo, new ArrayList<>()),
+            new Supermercado(null, "Eroski", "Calle Falsa 6", "600666777", "www.eroski.es", LocalTime.of(9,0), LocalTime.of(21,0), almendralejo, new ArrayList<>())
+        );
+
+        // Guardar todos los supermercados
+        supermercados.forEach(supermercadoRepository::save);
     }
     
     private void crearPlatos() {

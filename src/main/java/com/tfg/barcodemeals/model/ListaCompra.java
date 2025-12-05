@@ -36,4 +36,5 @@ public class ListaCompra {
 
 	@OneToMany(mappedBy = "listaCompra", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<LineaCompra> lineas = new ArrayList<>();
+	
 }
