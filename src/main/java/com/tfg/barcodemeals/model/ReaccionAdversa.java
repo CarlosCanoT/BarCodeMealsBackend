@@ -23,8 +23,7 @@ public class ReaccionAdversa {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Enumerated(EnumType.STRING)
-	 private TipoReaccion tipo;
+	private String nombre;
 	 private String descripcion;
 	 @ManyToMany(mappedBy = "reaccionesAdversas")
 	 private List<Usuario> usuarios;

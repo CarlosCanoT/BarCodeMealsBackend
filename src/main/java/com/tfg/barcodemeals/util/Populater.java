@@ -20,7 +20,6 @@ import com.tfg.barcodemeals.model.ReaccionAdversa;
 import com.tfg.barcodemeals.model.RegistroDiario;
 import com.tfg.barcodemeals.model.Supermercado;
 import com.tfg.barcodemeals.model.TipoComida; 
-import com.tfg.barcodemeals.model.TipoReaccion;
 import com.tfg.barcodemeals.model.UnidadMedida;
 import com.tfg.barcodemeals.model.Usuario; 
 import com.tfg.barcodemeals.repository.CiudadRepository;
@@ -100,8 +99,7 @@ public class Populater implements CommandLineRunner {
         Ciudad ciudadBase = ciudadRepository.findAll().stream().findFirst().orElse(null);
         Usuario usuarioBase = new Usuario(
             null, "demoUser", "password", "Demo", "demo@tfg.com", "600123456", 
-            LocalDate.of(1990, 1, 1), Genero.MASCULINO, 75.0, 180.0, 
-            35, ciudadBase, new ArrayList<>(), new ArrayList<>(), new ArrayList<>() 
+            LocalDate.of(1990, 1, 1), Genero.MASCULINO, 75.0, 180.0, ciudadBase, new ArrayList<>(), new ArrayList<>(), new ArrayList<>() 
         );
         usuarioBase = usuarioRepository.save(usuarioBase);
 
@@ -179,10 +177,10 @@ public class Populater implements CommandLineRunner {
         // Crear usuarios de ejemplo
         List<Usuario> usuarios = List.of(
             new Usuario(null, "anaPerez", "password123", "Ana Pérez", "ana@tfg.com", "600654321",
-                    LocalDate.of(1995, 6, 15), Genero.FEMENINO, 60.0, 165.0, 28,
+                    LocalDate.of(1995, 6, 15), Genero.FEMENINO, 60.0, 165.0,
                     ciudadBase, new ArrayList<>(), new ArrayList<>(), new ArrayList<>()),
             new Usuario(null, "juanLopez", "1234abcd", "Juan López", "juan@tfg.com", "600987654",
-                    LocalDate.of(1988, 3, 22), Genero.MASCULINO, 82.0, 175.0, 36,
+                    LocalDate.of(1988, 3, 22), Genero.MASCULINO, 82.0, 175.0,
                     ciudadBase, new ArrayList<>(), new ArrayList<>(), new ArrayList<>())
         );
 
@@ -198,20 +196,53 @@ public class Populater implements CommandLineRunner {
             registroDiarioRepository.save(registro);
         }
     }
-
     private void crearReaccionesAdversas() {
-        for (TipoReaccion tipo : TipoReaccion.values()) {
-            Optional<ReaccionAdversa> existing = reaccionAdversaRepository.findByTipo(tipo);
+        List<String> reacciones = List.of(
+        		"intolerancia a la lactosa",
+        		"intolerancia al gluten",
+        		"intolerancia a la fructosa",
+        		"intolerancia a la glucosa",
+        		"intolerancia al huevo",
+        		"intolerancia a la soja",
+        		"intolerancia al trigo",
+        		"intolerancia a la proteína de la leche",
+
+        		"alergia a la leche",
+        		"alergia al huevo",
+        		"alergia al pescado",
+        		"alergia a los mariscos",
+        		"alergia a los frutos secos",
+        		"alergia al cacahuete",
+        		"alergia a la mostaza",
+        		"alergia al sésamo",
+        		"alergia al apio",
+        		"alergia a los sulfitos",
+        		"alergia al trigo",
+
+        		"alergia a la manzana",
+        		"alergia a la fresa",
+        		"alergia al tomate",
+        		"alergia a la mandarina",
+        		"alergia a la zanahoria",
+        		"alergia al kiwi",
+
+        		"alergia al chocolate",
+        		"alergia al café"
+        );
+
+        for (String nombre : reacciones) {
+            Optional<ReaccionAdversa> existing = reaccionAdversaRepository.findByNombre(nombre);
             if (existing.isEmpty()) {
                 ReaccionAdversa ra = new ReaccionAdversa();
-                ra.setTipo(tipo);
-                ra.setDescripcion(tipo.toString()); 
-                ra.setUsuarios(new ArrayList<>()); 
+                ra.setNombre(nombre);
+                ra.setDescripcion(nombre); 
+                ra.setUsuarios(new ArrayList<>());
                 ra.setProductos(new ArrayList<>());
-                reaccionAdversaRepository.save(ra); 
+                reaccionAdversaRepository.save(ra);
             }
         }
     }
+
     
     private void crearSupermercados() {
         // Crear ciudad Almendralejo si no existe
@@ -269,9 +300,9 @@ public class Populater implements CommandLineRunner {
     }
     
     private void crearProductos() {
-    	ReaccionAdversa lactosa = reaccionAdversaRepository.findByTipo(TipoReaccion.INTOLERANCIA_LACTOSA).orElse(null);
-        ReaccionAdversa trigo = reaccionAdversaRepository.findByTipo(TipoReaccion.ALERGIA_TRIGO).orElse(null);
-        ReaccionAdversa huevo = reaccionAdversaRepository.findByTipo(TipoReaccion.ALERGIA_HUEVO).orElse(null);
+    	ReaccionAdversa lactosa = reaccionAdversaRepository.findByNombre("intolerancia a la lactosa").orElse(null);
+        ReaccionAdversa trigo = reaccionAdversaRepository.findByNombre("intolerancia al trigo").orElse(null);
+        ReaccionAdversa huevo = reaccionAdversaRepository.findByNombre("alergia al huevo").orElse(null);
         List<ReaccionAdversa> alergenosPan = new ArrayList<>();
         if (trigo != null) alergenosPan.add(trigo);
         if (huevo != null) alergenosPan.add(huevo);
@@ -282,7 +313,7 @@ public class Populater implements CommandLineRunner {
         
         Producto pollo = crearProductoData("2000000000018", "Pechuga de Pollo Fresca", "Avícola Premium", CategoriaProducto.CARNE, 500.0, 150.0, 165.0, 3.6, 1.0, 2.6, 0.0, 0.0, 31.0, 0.4, 0.0, UnidadMedida.GRAMOS, Envase.PLÁSTICO, null);
         
-        Producto pan = crearProductoData("8455544433321", "Pan Integral Masa Madre", "Panadería Rústica", CategoriaProducto.PAN_Y_BOLLERIA, 400.0, 100.0, 230.0, 3.0, 0.5, 2.5, 45.0, 3.0, 10.0, 0.5, 6.5, UnidadMedida.GRAMOS, Envase.PLÁSTICO, alergenosPan );
+        Producto pan = crearProductoData("8455544433321", "Pan Integral Masa Madre", "Panadería Rústica", CategoriaProducto.PAN, 400.0, 100.0, 230.0, 3.0, 0.5, 2.5, 45.0, 3.0, 10.0, 0.5, 6.5, UnidadMedida.GRAMOS, Envase.PLÁSTICO, alergenosPan );
         
         // Nuevo producto
         Producto aceite = crearProductoData("8437000371004", "Aceite de Oliva Virgen Extra", "Oleum", CategoriaProducto.ACEITES_Y_GRASAS, 500.0, 10.0, 900.0, 100.0, 15.0, 85.0, 0.0, 0.0, 0.0, 0.0, 0.0, UnidadMedida.MILILITROS, Envase.PLÁSTICO, null);

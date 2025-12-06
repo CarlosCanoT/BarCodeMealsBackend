@@ -5,14 +5,14 @@ public enum UnidadMedida {
     GRAMOS("g"),
     MILILITROS("ml");
 
-    private final String simbolo;
+    private final String texto;
 
-    UnidadMedida(String simbolo) {
-        this.simbolo = simbolo;
+    UnidadMedida(String texto) {
+        this.texto = texto;
     }
 
-    public String getSimbolo() {
-        return simbolo;
+    public String getTexto() {
+        return texto;
     }
 }
 

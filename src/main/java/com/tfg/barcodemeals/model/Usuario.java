@@ -41,7 +41,6 @@ public class Usuario {
     private Genero genero;
     private double peso;
     private double altura;
-    private int edad;
     
     @ManyToOne
     private Ciudad ciudad;
@@ -60,7 +59,7 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ObjetivoDiario> objetivosDiarios = new ArrayList<>();
     
-    private int calcularEdad() {
+    public int calcularEdad() {
         return Period.between(fechaNacimiento, LocalDate.now()).getYears();
     }
 }

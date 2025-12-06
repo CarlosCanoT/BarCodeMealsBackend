@@ -1,10 +1,22 @@
 package com.tfg.barcodemeals.model;
 
 public enum Envase {
-	PLÁSTICO, CARTÓN, VIDRIO, ORGÁNICO, NINGUNO, OTRO;
 	
-	 @Override
-	    public String toString() {
-	        return name().toLowerCase();
-	    }
+	PLÁSTICO("Plástico"),
+	CARTÓN("Cartón"),
+	VIDRIO("Vidrio"),
+	ORGÁNICO("Orgánico"),
+	NINGUNO("Ninguno"),
+	OTRO("Otro");
+	
+	private final String texto;
+	
+	Envase(String texto){
+		this.texto = texto;
+		
+	}
+	
+	public String getTexto() {
+        return texto;
+	}
 }

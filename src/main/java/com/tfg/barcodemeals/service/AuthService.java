@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.tfg.barcodemeals.dto.request.LoginRequest;
 import com.tfg.barcodemeals.dto.response.LoginResponse;
+import com.tfg.barcodemeals.dto.response.UsuarioResponse;
+import com.tfg.barcodemeals.mapper.UsuarioMapper;
 import com.tfg.barcodemeals.model.Usuario;
 import com.tfg.barcodemeals.repository.UsuarioRepository;
 
@@ -20,6 +22,7 @@ import lombok.RequiredArgsConstructor;
 public class AuthService {
 
     private final UsuarioRepository usuarioRepository;
+    private final UsuarioMapper usuarioMapper;
 
     private final String SECRET_KEY = "pruebaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
 
@@ -41,8 +44,9 @@ public class AuthService {
                 .setExpiration(new Date(System.currentTimeMillis() + 86400000)) 
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
-
-        return new LoginResponse(token, usuario.getId(), usuario.getNombreUsuario());
+       
+        		
+        return new LoginResponse(token, usuarioMapper.toResponse(usuario));
     }
 
 }

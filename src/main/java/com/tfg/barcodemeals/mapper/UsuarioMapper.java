@@ -25,7 +25,7 @@ public class UsuarioMapper {
                 usuario.getEmail(),
                 usuario.getTelefono(),
                 usuario.getFechaNacimiento(),
-                usuario.getEdad(),
+                usuario.calcularEdad(),
                 usuario.getGenero().toString(),
                 usuario.getPeso(),
                 usuario.getAltura(),
