@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 
 import com.tfg.barcodemeals.dto.request.ProductoRequest;
+import com.tfg.barcodemeals.dto.response.EnumResponse;
 import com.tfg.barcodemeals.dto.response.ProductoResponse;
 import com.tfg.barcodemeals.model.Producto;
 
@@ -20,7 +21,7 @@ public ProductoResponse toResponse(Producto producto) {
 			producto.getBarcode(),
 			producto.getNombre(),
 			producto.getMarca(),
-			producto.getCategoria().toString(),
+			new EnumResponse(producto.getCategoria().name(), producto.getCategoria().getTexto()),			
 			producto.getPesoEmpaque(),
 			producto.getPesoConsumido(),
 			producto.getKcal(),
@@ -32,8 +33,8 @@ public ProductoResponse toResponse(Producto producto) {
 			producto.getProteina(),
 			producto.getSal(),
 			producto.getFibra(),
-			producto.getUnidad().toString(),
-			producto.getEnvase().toString(),
+			new EnumResponse(producto.getUnidad().name(), producto.getUnidad().getTexto()),			
+			new EnumResponse(producto.getEnvase().name(), producto.getEnvase().getTexto()),			
 			Optional.ofNullable(producto.getReaccionesAdversas())
 					.orElse(List.of())
 					.stream()

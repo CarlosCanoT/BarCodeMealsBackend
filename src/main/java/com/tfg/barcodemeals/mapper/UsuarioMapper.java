@@ -1,17 +1,15 @@
 package com.tfg.barcodemeals.mapper;
 
-import com.tfg.barcodemeals.dto.request.UsuarioRequest;
-import com.tfg.barcodemeals.dto.response.ReaccionAdversaResponse;
-import com.tfg.barcodemeals.dto.response.UsuarioResponse;
-import com.tfg.barcodemeals.model.Usuario;
-
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
+
+import com.tfg.barcodemeals.dto.request.UsuarioRequest;
+import com.tfg.barcodemeals.dto.response.EnumResponse;
+import com.tfg.barcodemeals.dto.response.UsuarioResponse;
+import com.tfg.barcodemeals.model.Usuario;
 
 @Component
 public class UsuarioMapper {
@@ -26,7 +24,7 @@ public class UsuarioMapper {
                 usuario.getTelefono(),
                 usuario.getFechaNacimiento(),
                 usuario.calcularEdad(),
-                usuario.getGenero().toString(),
+                new EnumResponse(usuario.getGenero().name(), usuario.getGenero().getTexto()),
                 usuario.getPeso(),
                 usuario.getAltura(),
                 usuario.getCiudad().getId(),

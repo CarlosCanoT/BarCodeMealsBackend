@@ -12,7 +12,7 @@ public record UsuarioResponse(
         String telefono,
         LocalDate fechaNacimiento,
         int edad,                       
-        String genero,
+        EnumResponse genero,
         double peso,
         double altura,
         Long ciudadId,                 
