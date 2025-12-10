@@ -9,10 +9,8 @@ import com.tfg.barcodemeals.dto.request.UsuarioRequest;
 import com.tfg.barcodemeals.dto.response.UsuarioResponse;
 import com.tfg.barcodemeals.mapper.UsuarioMapper;
 import com.tfg.barcodemeals.model.Genero;
-import com.tfg.barcodemeals.model.TipoComida;
 import com.tfg.barcodemeals.model.Usuario;
 import com.tfg.barcodemeals.repository.CiudadRepository;
-import com.tfg.barcodemeals.repository.PrecioRepository;
 import com.tfg.barcodemeals.repository.ReaccionAdversaRepository;
 import com.tfg.barcodemeals.repository.UsuarioRepository;
 
@@ -47,7 +45,6 @@ public class UsuarioService implements CrudService<UsuarioResponse, UsuarioReque
 	public UsuarioResponse crear(UsuarioRequest request) {
 		Usuario usuario = new Usuario();
 		usuario.setNombreUsuario(request.nombreUsuario());
-		usuario.setContrasena(request.contrasena());
 		usuario.setApodo(request.apodo());
 		usuario.setEmail(request.email());
 		usuario.setTelefono(request.telefono());
@@ -69,7 +66,6 @@ public class UsuarioService implements CrudService<UsuarioResponse, UsuarioReque
 		return usuarioRepository.findById(id)
 				.map(usuario -> {
 					usuario.setNombreUsuario(request.nombreUsuario());
-					usuario.setContrasena(request.contrasena());
 					usuario.setApodo(request.apodo());
 					usuario.setEmail(request.email());
 					usuario.setTelefono(request.telefono());

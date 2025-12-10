@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tfg.barcodemeals.dto.request.ComidaRequest;
@@ -21,17 +22,15 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api/comidas")
 @RequiredArgsConstructor
-public class ComidaController implements CrudController<ComidaResponse, ComidaRequest> {
+public class ComidaController {
 
 	private final ComidaService comidaService;
 	
-	@Override
 	@GetMapping
 	public List<ComidaResponse> obtenerTodos() {
 		return comidaService.obtenerTodos();
 	}
 
-	@Override
 	@GetMapping("/{id}")
 	public ResponseEntity<ComidaResponse> obtenerPorId(@PathVariable Long id) {
 		return comidaService.obtenerPorId(id)
@@ -39,13 +38,11 @@ public class ComidaController implements CrudController<ComidaResponse, ComidaRe
 				.orElseGet(() -> ResponseEntity.notFound().build());
 	}
 
-	@Override
 	@PostMapping
-	public ResponseEntity<ComidaResponse> crear(@RequestBody ComidaRequest request) {
-		return ResponseEntity.ok(comidaService.crear(request));
+	public ResponseEntity<ComidaResponse> crear(@RequestBody ComidaRequest request, @RequestParam Long usuarioId) {
+		return ResponseEntity.ok(comidaService.crear(request, usuarioId));
 	}
 
-	@Override
 	@PutMapping("/{id}")
 	public ResponseEntity<ComidaResponse> actualizar(@PathVariable Long id, @RequestBody ComidaRequest request) {
 		return comidaService.actualizar(id, request)
@@ -53,7 +50,6 @@ public class ComidaController implements CrudController<ComidaResponse, ComidaRe
 				.orElseGet(() -> ResponseEntity.notFound().build());
 	}
 
-    @Override
     @DeleteMapping("/{id}")
 	public ResponseEntity<Void> eliminar(@PathVariable Long id) {
 		return comidaService.eliminar(id) ? ResponseEntity.noContent().build()

@@ -6,5 +6,7 @@ public record PlatoRequest(
 		Long id,
 	    String nombre,
 	    String descripcion,
-	    List<Long> productosIds  
+	    boolean esPublico,
+	    List<Long> productosIds,
+	    Long usuarioId
 ) {}

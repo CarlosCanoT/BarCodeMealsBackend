@@ -12,6 +12,7 @@ import com.tfg.barcodemeals.dto.response.ListaCompraResponse;
 import com.tfg.barcodemeals.mapper.ListaCompraMapper;
 import com.tfg.barcodemeals.model.ListaCompra;
 import com.tfg.barcodemeals.repository.ListaCompraRepository;
+import com.tfg.barcodemeals.repository.UsuarioRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 public class ListaCompraService implements CrudService<ListaCompraResponse, ListaCompraRequest>{
 	private final ListaCompraRepository listaCompraRepository;
 	private final ListaCompraMapper listaCompraMapper;
+	private final UsuarioRepository usuarioRepository;
 	
 	@Override
 	public Optional<ListaCompraResponse> obtenerPorId(Long id) {
@@ -35,12 +37,21 @@ public class ListaCompraService implements CrudService<ListaCompraResponse, List
 				.toList();		
 	}
 	
+	public List<ListaCompraResponse> obtenerPorUsuario(Long usuarioId){
+		return listaCompraRepository.findByUsuarioId(usuarioId)
+				.stream()
+				.map(listaCompraMapper::toResponse)
+				.toList();
+	}
+	
 	@Override
 	public ListaCompraResponse crear(ListaCompraRequest request) {
 		ListaCompra listaCompra = new ListaCompra();
 		listaCompra.setNombre(request.nombre());
 		listaCompra.setFechaCreacion(LocalDate.now());
 		listaCompra.setLineas(List.of());
+		listaCompra.setUsuario(usuarioRepository.findById(request.usuarioId())
+				.orElseThrow(() -> new RuntimeException("Usuario no encontrado")));
 		return listaCompraMapper.toResponse(listaCompraRepository.save(listaCompra));
 	}
 	

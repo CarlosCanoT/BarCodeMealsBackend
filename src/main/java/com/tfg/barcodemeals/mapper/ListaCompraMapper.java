@@ -26,11 +26,14 @@ public ListaCompraResponse toResponse(ListaCompra listaCompra) {
 					.collect(Collectors.toList())
 		);
 }
+
 public ListaCompraRequest toRequest(ListaCompra listaCompra) {
 	if(listaCompra == null) return null;
 	return new ListaCompraRequest(
 			listaCompra.getId(),
-			listaCompra.getNombre()
+			listaCompra.getNombre(),
+			listaCompra.getUsuario().getId()
+
 		);
 			
 }

@@ -7,6 +7,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -27,6 +28,7 @@ public class Comida implements ValorNutricional{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	private String nombre;
     @Enumerated(EnumType.STRING)
     private TipoComida tipo; 
 	private LocalDate fecha;
@@ -40,7 +42,7 @@ public class Comida implements ValorNutricional{
         joinColumns = @JoinColumn(name = "comida_id"),
         inverseJoinColumns = @JoinColumn(name = "plato_id")
     )
-    private List<Plato> platos;
+    private List<Plato> platos = new ArrayList<>();
     
     @ManyToMany
     @JoinTable(
@@ -48,7 +50,7 @@ public class Comida implements ValorNutricional{
         joinColumns = @JoinColumn(name = "comida_id"),
         inverseJoinColumns = @JoinColumn(name = "producto_id")
     )
-    private List<Producto> productos;
+    private List<Producto> productos  = new ArrayList<>();
     
     @Override
     public double getPeso() {

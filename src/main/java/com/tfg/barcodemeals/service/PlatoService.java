@@ -12,6 +12,7 @@ import com.tfg.barcodemeals.model.Plato;
 import com.tfg.barcodemeals.model.Producto;
 import com.tfg.barcodemeals.repository.PlatoRepository;
 import com.tfg.barcodemeals.repository.ProductoRepository;
+import com.tfg.barcodemeals.repository.UsuarioRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 public class PlatoService implements CrudService<PlatoResponse, PlatoRequest> {
 	private final PlatoRepository platoRepository;
 	private final ProductoRepository productoRepository;	
+	private final UsuarioRepository usuarioRepository;
 	private final PlatoMapper platoMapper;
 	
 	@Override
@@ -36,15 +38,25 @@ public class PlatoService implements CrudService<PlatoResponse, PlatoRequest> {
 				.toList();
 	}
 
+	public List<PlatoResponse> obtenerVisiblesParaUsuario(Long usuarioId) {
+	    return platoRepository.findVisibleForUser(usuarioId)
+	            .stream()
+	            .map(platoMapper::toResponse)
+	            .toList();
+	}
+
 	@Override
 	public PlatoResponse crear(PlatoRequest request) {
 		Plato plato = new Plato();
 		plato.setNombre(request.nombre());
 		plato.setDescripcion(request.descripcion());
+		plato.setEsPublico(request.esPublico());
 		  if (request.productosIds() != null && !request.productosIds().isEmpty()) {
 		        List<Producto> productos = productoRepository.findAllById(request.productosIds());
 		        plato.setProductos(productos);
 		    }
+		  plato.setUsuario(request.usuarioId() != null ? usuarioRepository.findById(request.usuarioId()).orElse(null) : null);
+
 		return platoMapper.toResponse(platoRepository.save(plato));
 	}
 
@@ -55,8 +67,10 @@ public class PlatoService implements CrudService<PlatoResponse, PlatoRequest> {
 			            plato.setNombre(request.nombre());
 			            plato.setDescripcion(request.descripcion());
 			            plato.setProductos(productoRepository.findAllById(request.productosIds()));
+			            plato.setEsPublico(request.esPublico());
 			            return platoMapper.toResponse(platoRepository.save(plato));
 			        });
+		 
 	}
 
 	@Override

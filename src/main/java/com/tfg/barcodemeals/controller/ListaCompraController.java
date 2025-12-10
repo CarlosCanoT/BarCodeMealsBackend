@@ -1,6 +1,7 @@
 package com.tfg.barcodemeals.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -37,6 +38,14 @@ public class ListaCompraController implements CrudController<ListaCompraResponse
 		return listaCompraService.obtenerPorId(id)
 				.map(ResponseEntity::ok)
 				.orElseGet(() -> ResponseEntity.notFound().build());
+	}
+	
+	@GetMapping("/usuario/{usuarioId}")
+	public ResponseEntity<List<ListaCompraResponse>> obtenerPorUsuario(@PathVariable Long usuarioId) {
+	    return Optional.ofNullable(listaCompraService.obtenerPorUsuario(usuarioId))
+	                   .filter(list -> !list.isEmpty())
+	                   .map(ResponseEntity::ok)
+	                   .orElseGet(() -> ResponseEntity.noContent().build());
 	}
 
 	@Override

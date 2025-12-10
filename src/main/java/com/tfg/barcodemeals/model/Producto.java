@@ -13,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -33,6 +34,8 @@ private String barcode;
 @Column(nullable = false)
 private String nombre;
 private String marca;
+private boolean esFraccion;
+private boolean esPublico;
 @Enumerated(EnumType.STRING)
 private CategoriaProducto categoria;
 private double pesoEmpaque;
@@ -72,8 +75,9 @@ private List<Plato> platos;
 @ManyToMany(mappedBy="productos")
 private List<Comida> comidas;
 
-@OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
-private List<Precio> precios;
+
+@ManyToOne
+private Usuario usuario;
 
 
 private double indice() {

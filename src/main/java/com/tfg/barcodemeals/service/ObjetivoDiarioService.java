@@ -56,6 +56,7 @@ public class ObjetivoDiarioService implements CrudService<ObjetivoDiarioResponse
 	public Optional<ObjetivoDiarioResponse> actualizar(Long id, ObjetivoDiarioRequest request) {
 		return objetivoDiarioRepository.findById(id)
 				.map(objetivoDiario -> {
+					objetivoDiario.setKcal(request.kcal());
 					objetivoDiario.setGrasa(request.grasa());
 					objetivoDiario.setHidratosCarbono(request.hidratosCarbono());
 					objetivoDiario.setAzucar(request.azucar());

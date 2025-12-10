@@ -39,6 +39,13 @@ public class LineaCompraService implements CrudService<LineaCompraResponse, Line
 				.map(lineaCompraMapper::toResponse)
 				.toList();
 	}
+	
+	public List<LineaCompraResponse> obtenerPorListaCompra(Long listaCompraId){
+		return lineaCompraRepository.findByListaCompraId(listaCompraId)
+				.stream()
+				.map(lineaCompraMapper::toResponse)
+				.toList();
+	}
 
 	@Override
 	public LineaCompraResponse crear(LineaCompraRequest request) {

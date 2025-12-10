@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,6 +27,7 @@ public class Plato implements ValorNutricional{
 
     private String nombre;
     private String descripcion;
+    private boolean esPublico;
  
     @ManyToMany
     @JoinTable(
@@ -34,6 +36,10 @@ public class Plato implements ValorNutricional{
         inverseJoinColumns = @JoinColumn(name = "producto_id")
     )
     private List<Producto> productos;
+    
+    @ManyToOne
+    private Usuario usuario;
+    
     @Override
     public double getPeso() { return productos.stream().mapToDouble(Producto::getPeso).sum(); }
     @Override

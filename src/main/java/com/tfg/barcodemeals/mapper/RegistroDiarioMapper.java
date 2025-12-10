@@ -5,13 +5,14 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
-
+import com.tfg.barcodemeals.controller.RegistroDiarioController;
 import com.tfg.barcodemeals.dto.request.RegistroDiarioRequest;
 import com.tfg.barcodemeals.dto.response.RegistroDiarioResponse;
 import com.tfg.barcodemeals.model.RegistroDiario;
 
 @Component
 public class RegistroDiarioMapper {
+
 public RegistroDiarioResponse toResponse(RegistroDiario registroDiario) {
 	if(registroDiario == null) return null;
 	return new RegistroDiarioResponse(
@@ -44,7 +45,9 @@ public RegistroDiarioRequest toRequest (RegistroDiario registroDiario) {
 			.orElse(List.of())
 			.stream()
 			.map(c -> c.getId())
-			.collect(Collectors.toList())
+			.collect(Collectors.toList()),
+			registroDiario.getFecha(),
+			registroDiario.getUsuario().getId()
 	);
 }
 }

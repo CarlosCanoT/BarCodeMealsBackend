@@ -7,6 +7,8 @@ public record ProductoResponse(
 	    String barcode,
 	    String nombre,
 	    String marca,
+	    boolean esFraccion,
+	    boolean esPublico,
 	    EnumResponse categoria,
 	    double pesoEmpaque,
 	    double pesoConsumido,
@@ -22,7 +24,7 @@ public record ProductoResponse(
 	    EnumResponse unidad,  
 	    EnumResponse envase, 
 	    List<Long> reaccionesAdversaIds,
-	    List<Long> precioIds
+	    Long usuarioId
 ) {}
 
 	

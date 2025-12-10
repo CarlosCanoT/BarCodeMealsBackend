@@ -21,6 +21,8 @@ public ProductoResponse toResponse(Producto producto) {
 			producto.getBarcode(),
 			producto.getNombre(),
 			producto.getMarca(),
+		    producto.isEsFraccion(),
+            producto.isEsPublico(),
 			new EnumResponse(producto.getCategoria().name(), producto.getCategoria().getTexto()),			
 			producto.getPesoEmpaque(),
 			producto.getPesoConsumido(),
@@ -40,11 +42,8 @@ public ProductoResponse toResponse(Producto producto) {
 					.stream()
 					.map(p -> p.getId())
 					.collect(Collectors.toList()),
-			Optional.ofNullable(producto.getPrecios())
-					.orElse(List.of())
-					.stream()
-					.map(p -> p.getId())
-					.collect(Collectors.toList())
+			producto.getUsuario() != null ? producto.getUsuario().getId() : null
+
 		);
 }
 
@@ -55,7 +54,8 @@ public ProductoRequest toRequest(Producto producto) {
 		producto.getId(),
 		producto.getBarcode(),	
 		producto.getNombre(),
-		producto.getMarca(),	
+		producto.getMarca(),
+		producto.isEsPublico(),
 		producto.getCategoria().toString(),	
 		producto.getPesoEmpaque(),	
 		producto.getPesoConsumido(),	
@@ -74,7 +74,8 @@ public ProductoRequest toRequest(Producto producto) {
 				.orElse(List.of())
 				.stream()
 				.map(p -> p.getId())
-				.collect(Collectors.toList())				
-	);
+				.collect(Collectors.toList()),
+				producto.getUsuario() != null ? producto.getUsuario().getId() : null
+		);
 }
 }

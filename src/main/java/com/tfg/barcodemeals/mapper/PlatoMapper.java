@@ -19,6 +19,7 @@ public class PlatoMapper {
 				plato.getId(),
 				plato.getNombre(),
 				plato.getDescripcion(),
+				plato.isEsPublico(),
 				plato.getPeso(),
 				plato.getKcal(),
 				plato.getGrasa(),
@@ -33,7 +34,9 @@ public class PlatoMapper {
 						.orElse(List.of())
 						.stream()
 						.map(p -> p.getId())
-						.collect(Collectors.toList())
+						.collect(Collectors.toList()),
+				plato.getUsuario() != null ? plato.getUsuario().getId() : null
+
 		);	
 	}
 	
@@ -44,11 +47,13 @@ public class PlatoMapper {
 				plato.getId(),
 				plato.getNombre(),
 				plato.getDescripcion(),
+				plato.isEsPublico(),
 				Optional.ofNullable(plato.getProductos())
 				.orElse(List.of())
 				.stream()
 				.map(p -> p.getId())
-				.collect(Collectors.toList())
+				.collect(Collectors.toList()),
+				plato.getUsuario() != null ? plato.getUsuario().getId() : null
 			);
 	}	
 }

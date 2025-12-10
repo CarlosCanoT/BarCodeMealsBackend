@@ -6,7 +6,6 @@ import java.util.List;
 public record UsuarioRequest(
         Long id,                        
         String nombreUsuario,
-        String contrasena,               
         String apodo,
         String email,
         String telefono,

@@ -35,6 +35,4 @@ public class Supermercado {
 	@ManyToOne
 	private Ciudad ciudad;
 	  
-	@OneToMany(mappedBy = "supermercado", cascade = CascadeType.ALL)
-    private List<Precio> precios = new ArrayList<>();
 }

@@ -15,7 +15,6 @@ public LineaCompraResponse toResponse(LineaCompra lineaCompra) {
 			lineaCompra.getId(),
 			lineaCompra.getCantidad(),
 			lineaCompra.isComprado(),
-			lineaCompra.getPrecioLinea(),
 			lineaCompra.getListaCompra().getId(),
 			lineaCompra.getProducto().getId()	
 			);

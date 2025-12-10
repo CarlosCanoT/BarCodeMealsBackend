@@ -7,6 +7,7 @@ public record ProductoRequest(
 	    String barcode,
 	    String nombre,
 	    String marca,
+	    boolean esPublico,
 	    String categoria,
 	    double pesoEmpaque,
 	    double pesoConsumido,
@@ -21,5 +22,6 @@ public record ProductoRequest(
 	    Double fibra,
 	    String unidad,
 	    String envase,
-	    List<Long> reaccionesAdversasIds  
+	    List<Long> reaccionesAdversasIds,
+	    Long usuarioId
 ) {}

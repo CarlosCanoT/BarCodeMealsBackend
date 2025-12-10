@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tfg.barcodemeals.dto.request.PlatoRequest;
@@ -38,6 +39,12 @@ public class PlatoController implements CrudController<PlatoResponse, PlatoReque
 				.map(ResponseEntity::ok)
 				.orElseGet(() -> ResponseEntity.notFound().build());
 	}
+	
+	@GetMapping("/visibles")
+	public List<PlatoResponse> obtenerVisiblesParaUsuario(@RequestParam Long usuarioId) {
+	    return platoService.obtenerVisiblesParaUsuario(usuarioId);
+	}
+
 
 	@Override
 	@PostMapping

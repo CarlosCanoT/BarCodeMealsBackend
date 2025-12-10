@@ -8,6 +8,7 @@ public record PlatoResponse(
 	    Long id,
 	    String nombre,
 	    String descripcion,
+	    boolean esPublico,
 	    double peso,
 	    double kcal,
 	    double grasa,
@@ -18,5 +19,6 @@ public record PlatoResponse(
 	    double proteina,
 	    double sal,
 	    double fibra,
-	    List<Long> productoIds  
+	    List<Long> productoIds,
+	    Long usuarioId
 ) {}

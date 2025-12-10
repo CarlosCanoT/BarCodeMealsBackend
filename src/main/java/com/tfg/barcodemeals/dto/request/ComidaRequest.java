@@ -5,6 +5,7 @@ import java.util.List;
 
 public record ComidaRequest(
 		Long id,
+		String nombre,
 	    String tipo,
 	    LocalDate fecha,
 	    List<Long> platoIds,

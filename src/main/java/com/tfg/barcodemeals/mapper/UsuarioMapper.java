@@ -40,7 +40,6 @@ public class UsuarioMapper {
     	  return new UsuarioRequest(
     			  usuario.getId(),
     			  usuario.getNombreUsuario(),
-    			  usuario.getContrasena(),
     			  usuario.getApodo(),
     			  usuario.getEmail(),
     			  usuario.getTelefono(),

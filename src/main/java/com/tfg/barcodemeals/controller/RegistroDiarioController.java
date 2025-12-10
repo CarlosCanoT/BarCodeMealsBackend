@@ -1,5 +1,6 @@
 package com.tfg.barcodemeals.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -39,6 +40,14 @@ public class RegistroDiarioController implements CrudController<RegistroDiarioRe
 				.orElseGet(() -> ResponseEntity.notFound().build());
 	}
 
+	@GetMapping("/usuario/{nombreUsuario}/fecha/{fecha}")
+    public ResponseEntity<RegistroDiarioResponse> obtenerPorNombreUsuarioYFecha(@PathVariable Long usuarioId, @PathVariable LocalDate fecha) {
+        return registroDiarioService
+                .obtenerPorUsuarioIdyFecha(usuarioId, fecha)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+	
 	@Override
 	@PostMapping
 	public ResponseEntity<RegistroDiarioResponse> crear(@RequestBody RegistroDiarioRequest request) {

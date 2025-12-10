@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.tfg.barcodemeals.dto.request.ComidaRequest;
 import com.tfg.barcodemeals.dto.response.ComidaResponse;
+import com.tfg.barcodemeals.dto.response.EnumResponse;
 import com.tfg.barcodemeals.model.Comida;
 
 @Component
@@ -17,8 +18,10 @@ public ComidaResponse toResponse(Comida comida) {
 	
 	return new ComidaResponse(
 			comida.getId(),
-			comida.getTipo().toString(),
+			comida.getNombre(),
+            new EnumResponse(comida.getTipo().name(), comida.getTipo().getTexto()),
 			comida.getFecha(),
+			comida.getRegistroDiario().getId(),
 			Optional.ofNullable(comida.getPlatos())
 					.orElse(List.of())
 					.stream() 
@@ -46,6 +49,7 @@ public ComidaRequest toRequest(Comida comida) {
 	if(comida==null) return null;
 	return new ComidaRequest(
 			comida.getId(),
+			comida.getNombre(),
 			comida.getTipo().toString(),
 			comida.getFecha(),
 			Optional.ofNullable(comida.getPlatos())
